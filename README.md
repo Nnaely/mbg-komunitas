@@ -1,7 +1,8 @@
 # Pondasi Laravel MBG
 
 Kerangka awal Laravel 12 untuk Mini Project Proyek 3 Kasus A MBG.
-Saat ini tersedia struktur Laravel serta pondasi data sekolah dan distribusi makanan.
+Saat ini tersedia struktur Laravel serta pondasi data sekolah, distribusi makanan,
+dan kolom peran pengguna.
 Tampilan tetap halaman welcome bawaan Laravel. Belum ada halaman pengelolaan sekolah,
 login, atau pelaporan MBG.
 
@@ -33,8 +34,9 @@ Contoh konfigurasi MySQL tersedia di `.env.example`. Buat database
 `mbg_komunitas` dan sesuaikan kredensial di `.env` saat diperlukan.
 Kemudian jalankan `php artisan migrate`.
 
-Migration dan model User masih bawaan Laravel. Seeder utama mengisi data sekolah
-dan distribusi makanan fiktif; login dan akun demo peran MBG belum tersedia.
+Tabel users bawaan Laravel diperluas melalui migrasi kolom peran. Model User masih
+bawaan Laravel. Seeder utama mengisi data sekolah dan distribusi makanan fiktif;
+login dan akun demo peran MBG belum tersedia.
 
 ## Pondasi data sekolah
 
@@ -81,6 +83,18 @@ Di dalam Tinker, baca distribusi beserta sekolahnya dengan:
 Tahap ini baru menyediakan migrasi, model, dan seeder distribusi. Halaman pengelolaan
 distribusi belum dibuat.
 
+## Migrasi peran pengguna
+
+Migrasi menambahkan kolom `role` pada tabel `users` dengan tiga nilai:
+`pelapor`, `pemantau`, dan `koordinator`. Peran default adalah `pelapor`, termasuk
+untuk pengguna yang sudah tersimpan sebelum migrasi dijalankan. Nilai di luar
+ketiga peran ditolak oleh batasan kolom database.
+
+Jalankan `php artisan migrate` setelah konfigurasi database sesuai. Rollback migrasi
+ini menghapus kolom `role` beserta nilai perannya, tetapi mempertahankan data akun
+lainnya. Tahap ini baru menyediakan struktur data peran; penyesuaian model User,
+akun demo, login, dan pembatasan akses akan dikerjakan terpisah.
+
 ## Pemeriksaan
 
 ```powershell
@@ -95,6 +109,8 @@ seeder tanpa duplikasi, serta pemanggilan seeder utama tanpa membuat akun.
 Empat test distribusi memeriksa penyimpanan dan relasi sekolah, penolakan referensi
 sekolah yang tidak tersedia, pembatasan penghapusan sekolah yang memiliki distribusi,
 serta pengulangan seeder tanpa duplikasi atau perubahan data sekolah lain.
+Lima test peran memeriksa nilai default, penyimpanan tiga peran, penolakan nilai
+lain, pemberian peran kepada akun lama, dan rollback tanpa menghapus akun.
 
 Test database menggunakan SQLite di memori yang terpisah dari database aplikasi,
 sehingga tidak mengubah data MySQL lokal. Pastikan ekstensi `pdo_sqlite` tersedia.
@@ -121,3 +137,17 @@ Jangan commit `.env`, token, atau kredensial pribadi.
 2. Model Distribusi
 3. Data Contoh Distribusi
 4. Pengujian Distribusi
+
+## Commit migrasi peran
+
+Pengembangan memakai alur test terlebih dahulu. Commit pertama berisi test yang
+memang gagal karena kolom `role` belum tersedia. Commit kedua menyediakan kolom
+dan nilai default, tetapi test pembatasan peran masih gagal. Commit ketiga
+melengkapi batasan nilai peran hingga ketiga test lulus. Commit keempat menambahkan
+pemeriksaan akun lama, rollback, serta dokumentasi. Kegagalan pada commit awal
+merupakan tahap pengujian yang disengaja dan dapat dijalankan ulang.
+
+1. Pengujian Peran Pengguna
+2. Migrasi Peran Pengguna
+3. Pembatasan Peran Pengguna
+4. Pengujian Migrasi Peran
