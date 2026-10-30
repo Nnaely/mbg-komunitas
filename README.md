@@ -92,6 +92,9 @@ php artisan test
 Dua test bawaan Laravel memeriksa respons halaman welcome dan contoh unit test.
 Tiga test sekolah memeriksa penyimpanan dan pembacaan melalui model, pengulangan
 seeder tanpa duplikasi, serta pemanggilan seeder utama tanpa membuat akun.
+Empat test distribusi memeriksa penyimpanan dan relasi sekolah, penolakan referensi
+sekolah yang tidak tersedia, pembatasan penghapusan sekolah yang memiliki distribusi,
+serta pengulangan seeder tanpa duplikasi atau perubahan data sekolah lain.
 
 Test database menggunakan SQLite di memori yang terpisah dari database aplikasi,
 sehingga tidak mengubah data MySQL lokal. Pastikan ekstensi `pdo_sqlite` tersedia.
@@ -111,3 +114,10 @@ Jangan commit `.env`, token, atau kredensial pribadi.
 2. Model Sekolah
 3. Data Contoh Sekolah
 4. Pengujian Data Sekolah
+
+## Commit pondasi distribusi
+
+1. Migrasi Distribusi
+2. Model Distribusi
+3. Data Contoh Distribusi
+4. Pengujian Distribusi
