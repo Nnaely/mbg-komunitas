@@ -1,9 +1,9 @@
 # Pondasi Laravel MBG
 
 Kerangka awal Laravel 12 untuk Mini Project Proyek 3 Kasus A MBG.
-Saat ini tersedia struktur Laravel dan pondasi data sekolah.
+Saat ini tersedia struktur Laravel serta pondasi data sekolah dan distribusi makanan.
 Tampilan tetap halaman welcome bawaan Laravel. Belum ada halaman pengelolaan sekolah,
-login, distribusi makanan, atau pelaporan MBG.
+login, atau pelaporan MBG.
 
 ## Kebutuhan
 
@@ -33,8 +33,8 @@ Contoh konfigurasi MySQL tersedia di `.env.example`. Buat database
 `mbg_komunitas` dan sesuaikan kredensial di `.env` saat diperlukan.
 Kemudian jalankan `php artisan migrate`.
 
-Migration dan model User masih bawaan Laravel. Seeder utama sekarang hanya mengisi
-data sekolah; login dan akun demo peran MBG belum tersedia.
+Migration dan model User masih bawaan Laravel. Seeder utama mengisi data sekolah
+dan distribusi makanan fiktif; login dan akun demo peran MBG belum tersedia.
 
 ## Pondasi data sekolah
 
@@ -59,6 +59,27 @@ Di dalam Tinker, baca data sekolah dengan:
 
 Seluruh nama dan alamat dalam seeder adalah data fiktif. Tahap ini belum menambahkan
 controller, route, formulir, atau tampilan khusus sekolah.
+
+## Pondasi data distribusi
+
+- Tabel `distributions` menyimpan sekolah tujuan (`school_id`), tanggal distribusi
+  (`distribution_date`), keterangan menu (`menu_description`), dan timestamps.
+- Model `Distribution` memiliki relasi `school()`, sedangkan `School` memiliki
+  relasi `distributions()`. Tanggal distribusi dikonversi menjadi objek tanggal.
+- `DistributionSeeder` mengisi dua distribusi untuk masing-masing dari tiga sekolah
+  fiktif. Seeder utama menjalankan `SchoolSeeder` terlebih dahulu, lalu
+  `DistributionSeeder` melalui `php artisan db:seed`.
+- Mengulangi seeder dengan data contoh yang sama tidak menggandakan distribusi.
+  Nama, alamat, tanggal, dan menu hanya untuk simulasi.
+
+Di dalam Tinker, baca distribusi beserta sekolahnya dengan:
+
+```php
+\App\Models\Distribution::with('school')->get();
+```
+
+Tahap ini baru menyediakan migrasi, model, dan seeder distribusi. Halaman pengelolaan
+distribusi belum dibuat.
 
 ## Pemeriksaan
 
