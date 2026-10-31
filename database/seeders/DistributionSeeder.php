@@ -35,10 +35,12 @@ class DistributionSeeder extends Seeder
                     ->where('menu_description', $menu['previous_description'])
                     ->update(['menu_description' => $menu['description']]);
 
-                $school->distributions()->firstOrCreate(
-                    ['distribution_date' => $date],
-                    ['menu_description' => $menu['description']],
-                );
+                $school->distributions()
+                    ->whereDate('distribution_date', $date)
+                    ->firstOrCreate(
+                        ['menu_description' => $menu['description']],
+                        ['distribution_date' => $date],
+                    );
             }
         }
     }
