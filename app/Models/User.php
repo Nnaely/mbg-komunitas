@@ -13,6 +13,21 @@ class User extends Authenticatable
     public const ROLE_PEMANTAU = 'pemantau';
     public const ROLE_KOORDINATOR = 'koordinator';
 
+    public function isPelapor(): bool
+    {
+        return $this->role === self::ROLE_PELAPOR;
+    }
+
+    public function isPemantau(): bool
+    {
+        return $this->role === self::ROLE_PEMANTAU;
+    }
+
+    public function isKoordinator(): bool
+    {
+        return $this->role === self::ROLE_KOORDINATOR;
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
