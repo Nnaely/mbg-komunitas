@@ -17,6 +17,10 @@ Route::get('/', function () {
 })->name('beranda');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/distribusi', [\App\Http\Controllers\DistributionController::class, 'index'])
+        ->middleware('role:koordinator')
+        ->name('distributions.index');
+
     Route::view('/area/pelapor', 'areas.role', ['namaPeran' => 'Pelapor'])
         ->middleware('role:pelapor')
         ->name('area.pelapor');
