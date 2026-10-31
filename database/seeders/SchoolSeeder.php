@@ -10,13 +10,30 @@ class SchoolSeeder extends Seeder
     public function run(): void
     {
         $schools = [
-            ['name' => 'SD Fiktif MBG 01', 'address' => 'Jalan Simulasi Nomor 1, Kota Contoh'],
-            ['name' => 'SMP Fiktif MBG 02', 'address' => 'Jalan Simulasi Nomor 2, Kota Contoh'],
-            ['name' => 'SMA Fiktif MBG 03', 'address' => 'Jalan Simulasi Nomor 3, Kota Contoh'],
+            [
+                'name' => 'SDN 035 Soka',
+                'address' => 'Jl. Soka No. 34, Merdeka, Kec. Sumur Bandung, Kota Bandung, Jawa Barat',
+                'previous_name' => 'SD Fiktif MBG 01',
+            ],
+            [
+                'name' => 'SMP Negeri 2 Bandung',
+                'address' => 'Jl. Sumatera No. 42, Merdeka, Kec. Sumur Bandung, Kota Bandung, Jawa Barat',
+                'previous_name' => 'SMP Fiktif MBG 02',
+            ],
+            [
+                'name' => 'SMAN 3 Bandung',
+                'address' => 'Jl. Belitung No. 8, Merdeka, Kec. Sumur Bandung, Kota Bandung, Jawa Barat',
+                'previous_name' => 'SMA Fiktif MBG 03',
+            ],
         ];
 
-        foreach ($schools as $school) {
-            School::firstOrCreate($school);
+        foreach ($schools as $schoolData) {
+            $school = School::where('name', $schoolData['previous_name'])->first()
+                ?? School::firstOrNew(['name' => $schoolData['name']]);
+
+            $school->name = $schoolData['name'];
+            $school->address = $schoolData['address'];
+            $school->save();
         }
     }
 }

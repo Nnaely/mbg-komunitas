@@ -4,7 +4,7 @@ Kerangka awal Laravel 12 untuk Mini Project Proyek 3 Kasus A MBG.
 Saat ini tersedia struktur Laravel serta pondasi data sekolah, distribusi makanan,
 dan kolom peran pengguna.
 Halaman welcome Laravel menyediakan tautan masuk dan tombol keluar untuk pengguna
-terautentikasi. Belum ada halaman pengelolaan sekolah atau pelaporan MBG.
+terautentikasi. Pengelolaan sekolah dan pelaporan MBG belum tersedia.
 
 ## Kebutuhan
 
@@ -35,7 +35,7 @@ Contoh konfigurasi MySQL tersedia di `.env.example`. Buat database
 Kemudian jalankan `php artisan migrate`.
 
 Tabel users bawaan Laravel diperluas melalui migrasi kolom peran. Model User masih
-bawaan Laravel. Seeder utama mengisi data sekolah dan distribusi makanan fiktif,
+bawaan Laravel. Seeder utama mengisi data sekolah di Bandung dan distribusi menu simulasi,
 serta akun demo untuk ketiga peran. Login dan logout memakai sesi Laravel, dengan
 pembatasan lima percobaan masuk per menit.
 
@@ -43,8 +43,8 @@ pembatasan lima percobaan masuk per menit.
 
 - Migration membuat tabel `schools` dengan `id`, `name`, `address`, dan timestamps.
 - Model `App\Models\School` digunakan untuk menyimpan dan membaca data sekolah.
-- `SchoolSeeder` mengisi tiga sekolah fiktif. Menjalankannya kembali tidak menggandakan
-  data contoh yang nama dan alamatnya masih sama, serta tidak menghapus data lain.
+- `SchoolSeeder` mengisi SDN 035 Soka, SMP Negeri 2 Bandung, dan SMAN 3 Bandung
+  beserta alamat sekolah. Seeder memperbarui nama sekolah contoh lama saat dijalankan.
 
 Setelah database MySQL/MariaDB tersedia dan kredensial `.env` sesuai, jalankan:
 
@@ -60,7 +60,7 @@ Di dalam Tinker, baca data sekolah dengan:
 \App\Models\School::all(['id', 'name', 'address']);
 ```
 
-Seluruh nama dan alamat dalam seeder adalah data fiktif. Tahap ini belum menambahkan
+Nama dan alamat sekolah dalam seeder mengikuti data referensi Dapodik. Tahap ini belum menambahkan
 controller, route, formulir, atau tampilan khusus sekolah.
 
 ## Pondasi data distribusi
@@ -69,8 +69,8 @@ controller, route, formulir, atau tampilan khusus sekolah.
   (`distribution_date`), keterangan menu (`menu_description`), dan timestamps.
 - Model `Distribution` memiliki relasi `school()`, sedangkan `School` memiliki
   relasi `distributions()`. Tanggal distribusi dikonversi menjadi objek tanggal.
-- `DistributionSeeder` mengisi dua distribusi untuk masing-masing dari tiga sekolah
-  fiktif. Seeder utama menjalankan `SchoolSeeder` terlebih dahulu, lalu
+- `DistributionSeeder` mengisi dua jadwal menu simulasi untuk masing-masing dari tiga
+  sekolah di Bandung. Seeder utama menjalankan `SchoolSeeder` terlebih dahulu, lalu
   `DistributionSeeder` melalui `php artisan db:seed`.
 - `UserSeeder` menyiapkan `pelapor@mbg.test`, `pemantau@mbg.test`, dan
   `koordinator@mbg.test` dengan peran masing-masing. Ketiganya memakai sandi
@@ -78,7 +78,7 @@ controller, route, formulir, atau tampilan khusus sekolah.
 
 Buka `http://127.0.0.1:8000/login` untuk masuk setelah menjalankan `php artisan db:seed`.
 - Mengulangi seeder dengan data contoh yang sama tidak menggandakan distribusi.
-  Nama, alamat, tanggal, dan menu hanya untuk simulasi.
+  Tanggal dan menu hanya simulasi, bukan catatan distribusi nyata.
 
 Di dalam Tinker, baca distribusi beserta sekolahnya dengan:
 

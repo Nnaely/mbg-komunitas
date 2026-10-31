@@ -37,8 +37,8 @@ class SchoolTest extends TestCase
         $this->assertDatabaseCount('schools', 3);
         $this->assertSame($originalIds, School::orderBy('id')->pluck('id')->all());
         $this->assertDatabaseHas('schools', [
-            'name' => 'SD Fiktif MBG 01',
-            'address' => 'Jalan Simulasi Nomor 1, Kota Contoh',
+            'name' => 'SDN 035 Soka',
+            'address' => 'Jl. Soka No. 34, Merdeka, Kec. Sumur Bandung, Kota Bandung, Jawa Barat',
         ]);
     }
 

@@ -8,7 +8,7 @@
 <body>
     <main>
         <h1>Daftar Distribusi Makanan</h1>
-        <p>Data distribusi makanan untuk sekolah.</p>
+        <p>Jadwal menu simulasi untuk sekolah di Kota Bandung.</p>
 
         <table>
             <thead>
