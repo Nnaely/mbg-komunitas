@@ -86,8 +86,9 @@ Di dalam Tinker, baca distribusi beserta sekolahnya dengan:
 \App\Models\Distribution::with('school')->get();
 ```
 
-Tahap ini baru menyediakan migrasi, model, dan seeder distribusi. Halaman pengelolaan
-distribusi belum dibuat.
+Daftar distribusi dapat dibuka oleh pemantau dan koordinator melalui dasbor masing-masing.
+Halaman ini menampilkan sekolah tujuan, tanggal distribusi, dan keterangan menu dari data
+yang sudah tersimpan; pengelolaan atau penambahan distribusi belum tersedia.
 
 ## Migrasi peran pengguna
 

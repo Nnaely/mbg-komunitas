@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/distribusi', [\App\Http\Controllers\DistributionController::class, 'index'])
-        ->middleware('role:koordinator')
+        ->middleware('role:pemantau,koordinator')
         ->name('distributions.index');
 
     Route::view('/area/pelapor', 'areas.role', ['namaPeran' => 'Pelapor'])

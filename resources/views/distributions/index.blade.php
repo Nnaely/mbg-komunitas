@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($distribusi as $item)
+                @forelse ($distributions as $item)
                     <tr>
                         <td>{{ $item->school->name }}</td>
                         <td>{{ $item->distribution_date->format('d-m-Y') }}</td>

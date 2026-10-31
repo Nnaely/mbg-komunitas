@@ -10,7 +10,7 @@ class DistributionController extends Controller
     public function index(): View
     {
         $distributions = Distribution::with('school')
-            ->orderByDesc('tanggal_distribusi')
+            ->orderByDesc('distribution_date')
             ->get();
 
         return view('distributions.index', compact('distributions'));
