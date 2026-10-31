@@ -3,8 +3,8 @@
 Kerangka awal Laravel 12 untuk Mini Project Proyek 3 Kasus A MBG.
 Saat ini tersedia struktur Laravel serta pondasi data sekolah, distribusi makanan,
 dan kolom peran pengguna.
-Tampilan tetap halaman welcome bawaan Laravel. Belum ada halaman pengelolaan sekolah,
-login, atau pelaporan MBG.
+Halaman welcome Laravel menyediakan tautan masuk dan tombol keluar untuk pengguna
+terautentikasi. Belum ada halaman pengelolaan sekolah atau pelaporan MBG.
 
 ## Kebutuhan
 
@@ -36,7 +36,8 @@ Kemudian jalankan `php artisan migrate`.
 
 Tabel users bawaan Laravel diperluas melalui migrasi kolom peran. Model User masih
 bawaan Laravel. Seeder utama mengisi data sekolah dan distribusi makanan fiktif,
-serta akun demo untuk ketiga peran. Fitur login belum tersedia.
+serta akun demo untuk ketiga peran. Login dan logout memakai sesi Laravel, dengan
+pembatasan lima percobaan masuk per menit.
 
 ## Pondasi data sekolah
 
@@ -74,6 +75,8 @@ controller, route, formulir, atau tampilan khusus sekolah.
 - `UserSeeder` menyiapkan `pelapor@mbg.test`, `pemantau@mbg.test`, dan
   `koordinator@mbg.test` dengan peran masing-masing. Ketiganya memakai sandi
   `password`. Menjalankan ulang seeder memperbarui ketiga akun demo tersebut.
+
+Buka `http://127.0.0.1:8000/login` untuk masuk setelah menjalankan `php artisan db:seed`.
 - Mengulangi seeder dengan data contoh yang sama tidak menggandakan distribusi.
   Nama, alamat, tanggal, dan menu hanya untuk simulasi.
 
