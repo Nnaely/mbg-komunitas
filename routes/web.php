@@ -15,3 +15,17 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::view('/area/pelapor', 'areas.role', ['namaPeran' => 'Pelapor'])
+        ->middleware('role:pelapor')
+        ->name('area.pelapor');
+
+    Route::view('/area/pemantau', 'areas.role', ['namaPeran' => 'Pemantau'])
+        ->middleware('role:pemantau')
+        ->name('area.pemantau');
+
+    Route::view('/area/koordinator', 'areas.role', ['namaPeran' => 'Koordinator'])
+        ->middleware('role:koordinator')
+        ->name('area.koordinator');
+});
