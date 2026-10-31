@@ -15,6 +15,7 @@
         @endif
         @if (auth()->user()->isPemantau() || auth()->user()->isKoordinator())
             <p><a href="{{ route('distributions.index') }}">Lihat distribusi makanan</a></p>
+            <p><a href="{{ route('reports.inbox') }}">Lihat laporan masuk</a></p>
         @endif
         <form method="POST" action="{{ route('logout') }}">
             @csrf

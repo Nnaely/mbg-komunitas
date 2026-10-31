@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function () {
         ->middleware(['role:pelapor', 'throttle:10,1'])
         ->name('reports.store');
 
+    Route::get('/laporan-masuk', [\App\Http\Controllers\ReportController::class, 'inbox'])
+        ->middleware('role:pemantau,koordinator')
+        ->name('reports.inbox');
+
+    Route::get('/laporan-masuk/{report}', [\App\Http\Controllers\ReportController::class, 'show'])
+        ->middleware('role:pemantau,koordinator')
+        ->name('reports.show');
+
     Route::get('/distribusi', [\App\Http\Controllers\DistributionController::class, 'index'])
         ->middleware('role:pemantau,koordinator')
         ->name('distributions.index');

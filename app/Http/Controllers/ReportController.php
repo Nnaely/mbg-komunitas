@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
+use App\Models\Report;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,5 +30,21 @@ class ReportController extends Controller
         return redirect()
             ->route('reports.index')
             ->with('status', 'Laporan berhasil dikirim.');
+    }
+
+    public function inbox(): View
+    {
+        return view('reports.inbox', [
+            'reports' => Report::with(['school', 'reporter'])
+                ->latest()
+                ->paginate(15),
+        ]);
+    }
+
+    public function show(Report $report): View
+    {
+        return view('reports.show', [
+            'report' => $report->load(['school', 'reporter']),
+        ]);
     }
 }
