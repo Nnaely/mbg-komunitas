@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public const ROLE_PELAPOR = 'pelapor';
+    public const ROLE_PEMANTAU = 'pemantau';
+    public const ROLE_KOORDINATOR = 'koordinator';
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
