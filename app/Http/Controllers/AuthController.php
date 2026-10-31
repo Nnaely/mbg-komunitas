@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,14 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/');
+        $dashboardRoute = match (Auth::user()->role) {
+            User::ROLE_PELAPOR => 'area.pelapor',
+            User::ROLE_PEMANTAU => 'area.pemantau',
+            User::ROLE_KOORDINATOR => 'area.koordinator',
+            default => abort(403),
+        };
+
+        return redirect()->intended(route($dashboardRoute));
     }
 
     public function logout(Request $request): RedirectResponse
