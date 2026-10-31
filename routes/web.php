@@ -14,7 +14,7 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('beranda');
 
 Route::middleware('auth')->group(function () {
     Route::view('/area/pelapor', 'areas.role', ['namaPeran' => 'Pelapor'])
