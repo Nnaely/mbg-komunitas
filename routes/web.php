@@ -17,6 +17,14 @@ Route::get('/', function () {
 })->name('beranda');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/laporan', [\App\Http\Controllers\ReportController::class, 'index'])
+        ->middleware('role:pelapor')
+        ->name('reports.index');
+
+    Route::post('/laporan', [\App\Http\Controllers\ReportController::class, 'store'])
+        ->middleware(['role:pelapor', 'throttle:10,1'])
+        ->name('reports.store');
+
     Route::get('/distribusi', [\App\Http\Controllers\DistributionController::class, 'index'])
         ->middleware('role:pemantau,koordinator')
         ->name('distributions.index');

@@ -19,4 +19,9 @@ class School extends Model
     {
         return $this->hasMany(Distribution::class);
     }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
 }

@@ -10,6 +10,9 @@
         <h1>Dasbor {{ $namaPeran }}</h1>
         <p>Selamat datang, {{ auth()->user()->name }}.</p>
         <p>Ini halaman awal untuk peran {{ strtolower($namaPeran) }}.</p>
+        @if (auth()->user()->isPelapor())
+            <p><a href="{{ route('reports.index') }}">Buat laporan</a></p>
+        @endif
         @if (auth()->user()->isPemantau() || auth()->user()->isKoordinator())
             <p><a href="{{ route('distributions.index') }}">Lihat distribusi makanan</a></p>
         @endif

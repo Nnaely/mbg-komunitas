@@ -4,7 +4,8 @@ Kerangka awal Laravel 12 untuk Mini Project Proyek 3 Kasus A MBG.
 Saat ini tersedia struktur Laravel serta pondasi data sekolah, distribusi makanan,
 dan kolom peran pengguna.
 Halaman welcome Laravel menyediakan tautan masuk dan tombol keluar untuk pengguna
-terautentikasi. Pengelolaan sekolah dan pelaporan MBG belum tersedia.
+terautentikasi. Pelapor dapat mengirim laporan dasar; pengelolaan sekolah dan
+penanganan lanjutan laporan belum tersedia.
 
 ## Kebutuhan
 
@@ -89,6 +90,12 @@ Di dalam Tinker, baca distribusi beserta sekolahnya dengan:
 Daftar distribusi dapat dibuka oleh pemantau dan koordinator melalui dasbor masing-masing.
 Halaman ini menampilkan sekolah tujuan, tanggal distribusi, dan keterangan menu dari data
 yang sudah tersimpan; pengelolaan atau penambahan distribusi belum tersedia.
+
+## Pelaporan dasar
+
+Pelapor dapat memilih sekolah, mengisi laporan, dan melihat laporan yang pernah dikirim
+melalui `/laporan`. Setiap laporan tersimpan dengan status awal `baru` dan terhubung ke
+akun pelapor serta sekolah. Pemantau dan koordinator belum memiliki halaman penanganan laporan.
 
 ## Migrasi peran pengguna
 
