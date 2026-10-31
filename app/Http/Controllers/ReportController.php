@@ -7,6 +7,7 @@ use App\Models\Report;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ReportController extends Controller
 {
@@ -46,5 +47,18 @@ class ReportController extends Controller
         return view('reports.show', [
             'report' => $report->load(['school', 'reporter']),
         ]);
+    }
+
+    public function update(Request $request, Report $report): RedirectResponse
+    {
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(['baru', 'diproses', 'selesai'])],
+        ]);
+
+        $report->update($validated);
+
+        return redirect()
+            ->route('reports.show', $report)
+            ->with('status', 'Status laporan berhasil diperbarui.');
     }
 }

@@ -33,6 +33,10 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:pemantau,koordinator')
         ->name('reports.show');
 
+    Route::patch('/laporan-masuk/{report}', [\App\Http\Controllers\ReportController::class, 'update'])
+        ->middleware('role:pemantau,koordinator')
+        ->name('reports.update');
+
     Route::get('/distribusi', [\App\Http\Controllers\DistributionController::class, 'index'])
         ->middleware('role:pemantau,koordinator')
         ->name('distributions.index');

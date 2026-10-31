@@ -96,7 +96,8 @@ yang sudah tersimpan; pengelolaan atau penambahan distribusi belum tersedia.
 Pelapor dapat memilih sekolah, mengisi laporan, dan melihat laporan yang pernah dikirim
 melalui `/laporan`. Setiap laporan tersimpan dengan status awal `baru` dan terhubung ke
 akun pelapor serta sekolah. Pemantau dan koordinator dapat melihat daftar laporan masuk
-serta halaman detailnya melalui dasbor. Perubahan status laporan belum tersedia.
+serta halaman detailnya melalui dasbor. Status dapat diperbarui menjadi `baru`, `diproses`,
+atau `selesai`, dan terlihat oleh pelapor di halaman laporannya.
 
 ## Migrasi peran pengguna
 
