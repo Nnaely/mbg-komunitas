@@ -35,8 +35,8 @@ Contoh konfigurasi MySQL tersedia di `.env.example`. Buat database
 Kemudian jalankan `php artisan migrate`.
 
 Tabel users bawaan Laravel diperluas melalui migrasi kolom peran. Model User masih
-bawaan Laravel. Seeder utama mengisi data sekolah dan distribusi makanan fiktif;
-login dan akun demo peran MBG belum tersedia.
+bawaan Laravel. Seeder utama mengisi data sekolah dan distribusi makanan fiktif,
+serta akun demo untuk ketiga peran. Fitur login belum tersedia.
 
 ## Pondasi data sekolah
 
@@ -71,6 +71,9 @@ controller, route, formulir, atau tampilan khusus sekolah.
 - `DistributionSeeder` mengisi dua distribusi untuk masing-masing dari tiga sekolah
   fiktif. Seeder utama menjalankan `SchoolSeeder` terlebih dahulu, lalu
   `DistributionSeeder` melalui `php artisan db:seed`.
+- `UserSeeder` menyiapkan `pelapor@mbg.test`, `pemantau@mbg.test`, dan
+  `koordinator@mbg.test` dengan peran masing-masing. Ketiganya memakai sandi
+  `password`. Menjalankan ulang seeder memperbarui ketiga akun demo tersebut.
 - Mengulangi seeder dengan data contoh yang sama tidak menggandakan distribusi.
   Nama, alamat, tanggal, dan menu hanya untuk simulasi.
 
@@ -92,8 +95,8 @@ ketiga peran ditolak oleh batasan kolom database.
 
 Jalankan `php artisan migrate` setelah konfigurasi database sesuai. Rollback migrasi
 ini menghapus kolom `role` beserta nilai perannya, tetapi mempertahankan data akun
-lainnya. Tahap ini baru menyediakan struktur data peran; penyesuaian model User,
-akun demo, login, dan pembatasan akses akan dikerjakan terpisah.
+lainnya. Tahap ini menyediakan struktur data peran dan akun demo; login dan
+pembatasan akses akan dikerjakan terpisah.
 
 ## Pemeriksaan
 

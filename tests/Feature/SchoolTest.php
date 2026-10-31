@@ -42,11 +42,11 @@ class SchoolTest extends TestCase
         ]);
     }
 
-    public function test_default_seeder_loads_schools_without_creating_accounts(): void
+    public function test_default_seeder_loads_schools_and_demo_accounts(): void
     {
         $this->seed(DatabaseSeeder::class);
 
         $this->assertDatabaseCount('schools', 3);
-        $this->assertDatabaseCount('users', 0);
+        $this->assertDatabaseCount('users', 3);
     }
 }
